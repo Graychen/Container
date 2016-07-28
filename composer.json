@@ -1,0 +1,16 @@
+{
+    "name": "graychen/container",
+    "description": "a container for interface and container",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Graychen",
+            "email": "13780185250@sina.cn"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+            "phpunit/phpunit" : "~4.3" 
+        }
+}
