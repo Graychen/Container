@@ -17,5 +17,10 @@
         "psr-4":{
             "graychen\\container\\" : "src"
         }
+    },
+    "autoload-dev":{
+        "psr-4":{
+            "graychen\\container\\Tests\\":"tests/"
+        }
     }
 }
