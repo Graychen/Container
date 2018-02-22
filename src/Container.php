@@ -43,6 +43,7 @@ class Container implements \ArrayAccess
             $this->_instances[$name]=$obj;
         }
         return $obj;
+
     } 
 
     //检测是否已经绑定
@@ -60,7 +61,7 @@ class Container implements \ArrayAccess
     //设置服务
     public function set($name, $class)
     {
-        $this->_registerService($name,$class);
+        $this->_registerService($name, $class);
     }
 
     //设置共享服务
@@ -103,4 +104,5 @@ class Container implements \ArrayAccess
     {
         return $this->remove($offset);
     }
+
 } 

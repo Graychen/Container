@@ -7,9 +7,10 @@ use graychen\container\tests\Fixtures\Log;
 
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetNew(){
+    public function testSetNew()
+    {
         $container = new Container(); 
-        $container->offsetSet("log",new Log());
+        $container->offsetSet("log", new Log());
         $this->assertTrue($container->offsetExists("log"));
         $this->assertEquals("write", $container->get("log")->write());
         $this->assertEquals("write", $container->offsetGet("log")->write());
@@ -19,7 +20,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testSetShared() 
     {
         $container = new Container();
-        $container->setShared("logShared", function($content="") {
+        $container->setShared("logShared", function ($content="") {
             return new Log($content);
         });
         $log=$container->get("logShared", array("writeContent"));
@@ -30,8 +31,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         $container->set("log", "graychen\container\\tests\Fixtures\Log");
-        $log=$container->get("log",array("setString"));
-        $this->assertEquals("setString",$log->content);;
+        $log=$container->get("log", array("setString"));
+        $this->assertEquals("setString", $log->content);;
     }
 
     public function testSetConcrete()
