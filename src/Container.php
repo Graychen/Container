@@ -1,5 +1,5 @@
 <?php
-namespace container;
+namespace graychen\container;
 
 /**
 * @brief 服务容器
@@ -12,16 +12,16 @@ class Container implements \ArrayAccess{
     //获取服务
     public function get($name,$params=[]){
         //先从实例化的列表中查找
-        if(isset($this->$_instances[$name])){
-            return $this->$_instances[$name]; 
+        if(isset($this->_instances[$name])){
+            return $this->_instances[$name];
         }
 
         //检测有没有注册该服务
-        if(!isset($this->$_bindings[$name])){
+        if(!isset($this->_bindings[$name])){
             return null;
         }
 
-        $concrete = $this->$_bindings[$name]['class'];//对象具体注册内容
+        $concrete = $this->_bindings[$name]['class'];//对象具体注册内容
 
         $obj = null;
 
@@ -37,7 +37,7 @@ class Container implements \ArrayAccess{
             }
         }
         //如果是共享服务，则写入_instances列表，下次直接取回
-        if($this->_bindings[$name]['shared']==true && $ojb){
+        if($this->_bindings[$name]['shared']==true && $obj){
             $this->_instances[$name]=$obj;
         }
 
@@ -53,14 +53,17 @@ class Container implements \ArrayAccess{
     public function remove($name){
         unset($this->_bindings[$name],$this->_instances[$name]);
     }
+
     //设置服务
     public function set($name,$class){
         $this->_registerService($name,$class);
     }
+
     //设置共享服务
     public function setShared($name,$class){
         $this->_registerService($name,$class,true);
     }
+
     //注册服务
     private function _registerService($name,$class,$shared=false){
         $this->remove($name);
@@ -70,18 +73,22 @@ class Container implements \ArrayAccess{
             $this->_bindings[$name]=array("class"=>$class,"shared"=>$shared); 
         }
     }
+
     //ArrayAccess接口，检测服务是否存在
     public function offsetExists($offset){
         return $this->has($offset);
     }
+
     //ArrayAccess接口,以$di[$name]方式获取服务
     public function offsetGet($offset){
        return $this->get($offset); 
     }
+
     //ArrayAccess接口,以$di[$name]方式获取服务
     public function offsetSet($offset,$value){
         return $this->set($offset,$value);
     }
+
     //卸载服务
     public function offsetUnset($offset){
         return $this->remove($offset);

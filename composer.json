@@ -15,12 +15,12 @@
         },
     "autoload":{
         "psr-4":{
-            "graychen\\container\\" : "src"
+            "graychen\\container\\":"src"
         }
     },
     "autoload-dev":{
         "psr-4":{
-            "graychen\\container\\Tests\\":"tests/"
+            "graychen\\container\\tests\\":"tests"
         }
     }
 }
