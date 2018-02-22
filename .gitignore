@@ -1,1 +1,7 @@
 vendor
+.idea
+node_modules/
+package-lock.json
+package.json
+coverage
+coverage.clover
