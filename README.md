@@ -35,7 +35,7 @@ $log=$container->get("log", array("setString"));
  $container->offsetSet("log", new Log());
  $container->offsetGet("log")
 ```
-###容器中的判断语句
+### 容器中的判断语句
 #### 判断容器中是否存在这个类
 ```
 $container->offsetExists("log")
