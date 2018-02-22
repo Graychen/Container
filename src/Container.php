@@ -11,7 +11,8 @@ class Container implements \ArrayAccess
     private $_instances= [];//已经实例化的服务
 
     //获取服务
-    public function get($name, $params=[]){
+    public function get($name, $params=[])
+    {
         //先从实例化的列表中查找
         if (isset($this->_instances[$name])) {
             return $this->_instances[$name];
@@ -27,7 +28,7 @@ class Container implements \ArrayAccess
         $obj = null;
 
         if ($concrete instanceof \Closure) { //匿名函数方式
-            $obj = call_user_func_array($concrete,$params);
+            $obj = call_user_func_array($concrete, $params);
         } elseif (is_string($concrete)) {     //字符串方式
             if (empty($params)) {
                 $obj = new $concrete;
@@ -41,9 +42,7 @@ class Container implements \ArrayAccess
         if ($this->_bindings[$name]['shared']==true && $obj) {
             $this->_instances[$name]=$obj;
         }
-
         return $obj;
-
     } 
 
     //检测是否已经绑定
@@ -59,25 +58,25 @@ class Container implements \ArrayAccess
     }
 
     //设置服务
-    public function set($name,$class)
+    public function set($name, $class)
     {
         $this->_registerService($name,$class);
     }
 
     //设置共享服务
-    public function setShared($name,$class)
+    public function setShared($name, $class)
     {
-        $this->_registerService($name,$class,true);
+        $this->_registerService($name, $class, true);
     }
 
     //注册服务
-    private function _registerService($name,$class,$shared=false)
+    private function _registerService($name, $class, $shared=false)
     {
         $this->remove($name);
-        if(!($class instanceof \Closure) && is_object($class)) {
+        if (!($class instanceof \Closure) && is_object($class)) {
             $this->_instances[$name]=$class;
         } else {
-            $this->_bindings[$name]=array("class"=>$class,"shared"=>$shared); 
+            $this->_bindings[$name]=array("class"=>$class,"shared"=>$shared);
         }
     }
 
@@ -90,13 +89,13 @@ class Container implements \ArrayAccess
     //ArrayAccess接口,以$di[$name]方式获取服务
     public function offsetGet($offset) 
     {
-       return $this->get($offset); 
+        return $this->get($offset); 
     }
 
     //ArrayAccess接口,以$di[$name]方式获取服务
-    public function offsetSet($offset,$value)
+    public function offsetSet($offset, $value)
     {
-        return $this->set($offset,$value);
+        return $this->set($offset, $value);
     }
 
     //卸载服务
