@@ -9,8 +9,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase{
 
     public function testSetNew(){
         $container = new Container(); 
-        $container->set("log",new Log());
+        $container->offsetSet("log",new Log());
+        $this->assertTrue($container->offsetExists("log"));
         $this->assertEquals("write",$container->get("log")->write());
+        $this->assertEquals("write",$container->offsetGet("log")->write());
+        $this->assertEmpty($container->offsetUnset("write"));
     }
 
     public function testSetShared(){
@@ -27,5 +30,18 @@ class ContainerTest extends \PHPUnit_Framework_TestCase{
         $container->set("log","graychen\container\\tests\Fixtures\Log");
         $log=$container->get("log",array("setString"));
         $this->assertEquals("setString",$log->content);;
+    }
+
+    public function testSetConcrete(){
+        $container = new Container();
+        $container->set("log","graychen\container\\tests\Fixtures\Log");
+        $log=$container->get("log");
+        $this->assertEmpty($log->content);
+    }
+
+    public function testSetEmpty(){
+        $container = new Container(); 
+        $log=$container->get("");
+        $this->assertEmpty($log);
     }
 }
