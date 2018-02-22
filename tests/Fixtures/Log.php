@@ -1,14 +1,15 @@
 <?php
 namespace graychen\container\tests\Fixtures;
 
-class Log{
+class Log
+{
     public $content;
     public function __construct($content="")
     {
         $this->content=$content;
     }
 
-    function write()
+    public function write()
     {
         return "write";
     }

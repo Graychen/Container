@@ -4,7 +4,7 @@ namespace graychen\container\tests\Fixtures;
 
 interface LogInterface
 {
-    function write();
+  public function write();
 }
 
 
