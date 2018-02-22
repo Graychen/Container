@@ -43,8 +43,7 @@ class Container implements \ArrayAccess
             $this->_instances[$name]=$obj;
         }
         return $obj;
-
-    } 
+    }
 
     //检测是否已经绑定
     public function has($name)
@@ -88,9 +87,9 @@ class Container implements \ArrayAccess
     }
 
     //ArrayAccess接口,以$di[$name]方式获取服务
-    public function offsetGet($offset) 
+    public function offsetGet($offset)
     {
-        return $this->get($offset); 
+        return $this->get($offset);
     }
 
     //ArrayAccess接口,以$di[$name]方式获取服务
@@ -105,4 +104,4 @@ class Container implements \ArrayAccess
         return $this->remove($offset);
     }
 
-} 
+}
