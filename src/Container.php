@@ -103,5 +103,4 @@ class Container implements \ArrayAccess
     {
         return $this->remove($offset);
     }
-
 }
